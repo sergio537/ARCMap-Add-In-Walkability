@@ -220,7 +220,7 @@ public class DockableWindowSergio extends DockableWindow {
 			for(int i=0; i<map.getLayerCount(); i++) {
 				if(map.getLayer(i) instanceof NetworkLayer)
 					networkLayer = (NetworkLayer) map.getLayer(i);
-				else if(map.getLayer(i).getName().equals("at_grade"))
+				else if(map.getLayer(i).getName().equals("osm_ped_in_singapore"))
 					roadsLayer = (FeatureLayer) map.getLayer(i);
 			}
 			//Save the road types in an auxiliary array
@@ -235,7 +235,7 @@ public class DockableWindowSergio extends DockableWindow {
 			cursor.flush();
 			cursor = roadsLayer.getFeatureClass().search(null, true);
 			feature = cursor.nextFeature();
-			int functionIndex = roadsLayer.getFeatureClass().findField("FUNCTION");
+			int functionIndex = roadsLayer.getFeatureClass().findField("highway");
 			crosss = new String[size+1];
 			while(feature!=null) {
 				crosss[feature.getOID()] = (String) feature.getValue(functionIndex);
@@ -466,7 +466,7 @@ public class DockableWindowSergio extends DockableWindow {
 							map.refresh();
 							times[3] += System.currentTimeMillis();
 							times[7] += System.currentTimeMillis();
-							JOptionPane.showMessageDialog(jPanel, "costs:"+times[0]+", paths:"+times[1]+", renderer:"+times[2]+", insertion:"+times[3]/*+", total:"+times[4]*/);
+							JOptionPane.showMessageDialog(jPanel, "costs:"+times[0]+", paths:"+times[1]+", renderer:"+times[2]+", insertion:"+times[3]/*+", total:"+times[7]*/);
 						}
 						else
 							JOptionPane.showMessageDialog(jPanel, "Fill the numeric parameters");
@@ -483,7 +483,7 @@ public class DockableWindowSergio extends DockableWindow {
 			private double getCost(int lenghtB, int angleB, DefaultWeightedEdge edge, String crossing) throws AutomationException, IOException {
 				Coord s = graph.getEdgeSource(edge);
 				Coord t = graph.getEdgeTarget(edge);
-				double addDistance = chCross.isSelected()?(crossing.equals("TRAFFIC CROSSING")?100:0):0;
+				double addDistance = chCross.isSelected()?(!crossing.equals("footway")?100:0):0;
 				return (lenghtB*(addDistance + Math.hypot(s.x-t.x,s.y-t.y))+angleB*300*(Math.sin(Math.atan2(t.y-s.y, t.x-s.x))+1)/2)/(lenghtB+angleB);
 			}
 		});

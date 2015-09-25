@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ESRI.Configuration xmlns="http://schemas.esri.com/Desktop/AddIns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>SimpleSergio</Name>
+  <Name>PedAccessAddIn</Name>
   <AddInID>default</AddInID>
   <Description></Description>
   <Version>1.0</Version>
   <Image></Image>
-  <Author></Author>
-  <Company></Company>
+  <Author>Sergio Ordonez</Author>
+  <Company>FCL</Company>
   <Date>Thu Aug 21 12:38:28 SGT 2014</Date>
   <Targets>
     <Target name="Desktop" version="10.2"/>
   </Targets>
-  <AddIn language="JAVA" library="SimpleSergioTest.jar">
+  <AddIn language="JAVA" library="PedAccessAddIn.jar">
     <ArcMap>
       <Commands>
-        <Button caption="Button Sergio" category="Sergio" class="ButtonSergio" id="buttonSergio"/>
+        <Button caption="Prepare" category="Pedestrian accessibility" class="PrepareButton" id="buttonPr"/>
+        <Button caption="Parameters" category="Pedestrian accessibility" class="ParametersButton" id="buttonPa"/>
+        <Button caption="Calculate" category="Pedestrian accessibility" class="CalculateButton" id="buttonCa"/>
+        <Button caption="Batch calc" category="Pedestrian accessibility" class="CalculateBulkButton" id="buttonCaBu"/>
       </Commands>
-      <DockableWindows>
-        <DockableWindow caption="Dockable Window Sergio" class="DockableWindowSergio" id="dockablewindowSergio">
-          <InitialPlacement position="left" state="hidden"/>
-        </DockableWindow>
-      </DockableWindows>
     </ArcMap>
   </AddIn>
 </ESRI.Configuration>
